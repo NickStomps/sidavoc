@@ -26,6 +26,11 @@ Route::get('/', function () {
     return view('home');
 });
 
+Route::get('/activiteit', function () {
+    return view('activiteitendetails');
+});
+
+
 Route::get('/activiteitBeheer', [\App\Http\Controllers\ActiviteitBeheerController::class, 'index'])->name('activiteitBeheer');
 Route::post('/activiteitBeheer/save',[\App\Http\Controllers\ActiviteitBeheerController::class,'store'])->name('activiteitBeheer.store');
 
@@ -39,3 +44,4 @@ Route::get('/account', function () {
         return view('account');
     }
 });
+
