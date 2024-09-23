@@ -6,6 +6,7 @@ use App\Models\activiteit;
 use App\Models\activiteitBeheer;
 use Exception;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 
 class ActiviteitBeheerController extends Controller
 {
@@ -14,7 +15,8 @@ class ActiviteitBeheerController extends Controller
      */
     public function index()
     {
-        return view('activiteitBeheer');
+        $minDate = activiteit::where('Begin_activiteit', '>=', Carbon::now())->min('Begin_activiteit');
+        return view('activiteitBeheer', ['minDate' => $minDate]);
     }
 
     /**
@@ -32,7 +34,7 @@ class ActiviteitBeheerController extends Controller
 {
     try{
         $this->validate($request, [
-            'image' => 'required|image|mimes:png,jpg,jpeg,gif,webp|max:2048',
+            'image' => 'image|mimes:png,jpg,jpeg,gif,webp|max:2048',
         ]);
 
         // Save the image in the 'public/images' directory
