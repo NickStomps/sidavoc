@@ -1,6 +1,6 @@
 @extends('layout')
 
-@section('content')
+@section('content')  
 
 @php
 // Mock up data om te testen
