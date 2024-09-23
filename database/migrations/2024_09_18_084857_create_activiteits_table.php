@@ -12,6 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('activiteit', function (Blueprint $table) {
+            
             $table->id();
             $table->string("naam_activiteit");
             $table->text("Details_activiteit");
@@ -21,6 +22,8 @@ return new class extends Migration
             $table->boolean("eten_inclusief");
             $table->double("Kosten");
             $table->integer("maximaal_deelnemers");
+            $table->string("image_path");
+            $table->timestamps();
         });
     }
 

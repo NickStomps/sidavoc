@@ -1,9 +1,20 @@
 @extends('layout')
 
 @section("content")
+@if(\Session::has('bericht'))
+<div class="bg-green-600 rounded w-1/2 m-auto text-center border-black border">
+    <p class="text-white text-lg m-2">{!! \Session::get('bericht') !!}</p>
+</div>
+@endif
+@if(\Session::has('error'))
+<div class="bg-red-600 rounded w-1/2 m-auto text-center border-black border"> 
+    <p class="text-white text-lg m-2">{!! \Session::get('error') !!}</p>
+</div>
+@endif
 <div class="w-full">
     <h1 class="text-2xl flex justify-center my-5">Activiteit Toevoegen!</h1>
-        <form action="">
+        <form action="/activiteitBeheer/save" method="POST" enctype="multipart/form-data">
+            @csrf
             <div class="w-full flex flex-col items-center mb-10">            
                 <div class="flex ml-10 flex-col w-[33%]">
                     <label for="activiteitNaam" class="ml-10 mt-10">Naam Activiteit</label>
@@ -19,7 +30,7 @@
                 </div>
                     <div class="flex ml-10 flex-col w-[33%]">
                     <label for="activititeitEindDatum" class="ml-10 mt-10">Eind tijd van de activiteit</label>
-                    <input type="datetime-local" name="activititeitEindDatum" id="activititeitEindDatum" class="rounded border border-black ml-10 bg-slate-100">
+                    <input type="datetime-local" name="activiteitEindDatum" id="activiteitEindDatum" class="rounded border border-black ml-10 bg-slate-100">
                 </div>
                 <div class="flex ml-10 flex-col w-[33%]">
                     <label for="activiteitLocatie" class="ml-10 mt-10">Locatie van activiteit</label>
@@ -29,17 +40,16 @@
                     <label for="eten" class="ml-10 mt-10">Eten inclusief</label>
                     
                     <label for="eten" class="ml-10">Ja</label>
-                    <input type="radio" id="eten" name="eten">
-
-                    <label for="eten" class="ml-10">Nee</label>
-                    <input type="radio" id="eten" name="eten">
+                    <input type="hidden" name="eten" value="0">
+                    <input type="checkbox" value="1" id="eten" name="eten">
                 </div>
                 <div class="flex ml-10 flex-col w-[20%]">
                     <label class="ml-10 mt-10" for="activiteitAfbeelding">Afbeelding voor de activiteit</label>
-                    <input type="file" name="activiteitAfbeelding" id="activiteitAfbeelding" class="rounded border border-black ml-10 bg-slate-100">
+                    <input type="file" name="image" id="activiteitAfbeelding" required class="rounded border border-black ml-10 bg-slate-100">
                 </div>
                 <div class="flex ml-10 flex-col w-[20%]">
                     <label class="ml-10 mt-10" for="kosten">Kosten</label>
+                    
                     <input type="text" name="kosten" id="kosten" class="rounded border border-black ml-10 bg-slate-100">
                 </div>
                 <div class="flex ml-10 flex-col w-[20%]">
