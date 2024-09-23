@@ -1,8 +1,8 @@
 @extends('layout')
 
 @section('content')
-<div class="my-10 w-full flex items-center flex-col flex-wrap">
-    <img class="w-5/6 max-h-60 mb-10" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRnVUPNqtPjrBuSbUznwaPAXtLjYDokWUXPBA&s" alt="paars">
+<div class="my-10 w-full flex items-center flex-col flex-wrap"> 
+    <div class="w-full h-[200px] bg-gray-300 rounded-t-lg mb-10"></div> 
     <div class="flex justify-between w-[80%] mx-[128px] mb-10">
         <h1 class="text-3xl">Volleybal</h1>
         <button class="bg-green-400 border-solid border-green-500 border-2 rounded-md text-2xl">Deelnemen</button>
