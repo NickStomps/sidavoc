@@ -18,12 +18,7 @@
                         <a href="/">
                             home
                         </a>
-                     </li>
-                     <li>
-                        <a href="#">
-                            overzicht
-                        </a>
-                     </li>   
+                     </li> 
                      <li>
                         <a href="/account">
                             <i class="fa-solid fa-user"></i>
