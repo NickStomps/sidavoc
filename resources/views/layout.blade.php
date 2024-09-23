@@ -15,7 +15,7 @@
              <div class="flex justify-center w-full"> 
                  <ul class="flex justify-between w-[50%] my-3">
                      <li>
-                        <a href="#">
+                        <a href="/">
                             home
                         </a>
                      </li>
@@ -25,7 +25,7 @@
                         </a>
                      </li>   
                      <li>
-                        <a href="#">
+                        <a href="/account">
                             <i class="fa-solid fa-user"></i>
                         </a>
                      </li> 
