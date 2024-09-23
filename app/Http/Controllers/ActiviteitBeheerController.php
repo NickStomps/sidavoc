@@ -58,7 +58,7 @@ class ActiviteitBeheerController extends Controller
         
         return redirect()->route('activiteitBeheer')->with('bericht', 'Activiteit toegevoegd met succes!');
     } catch (Exception $e) {
-        return redirect()->route('activiteitBeheer')->with('error', $e->getMessage());
+        return redirect()->route('activiteitBeheer')->with('error', 'Er is iets fout gegaan bij het aanmaken van de activiteit!');
     }
 }
 
