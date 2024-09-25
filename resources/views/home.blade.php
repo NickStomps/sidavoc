@@ -32,7 +32,7 @@ $vandaag = date('d/m/Y');
             </div>
             <div class="flex flex-wrap gap-4">
                 {{-- Card --}}
-                    <a href="#" class="w-[35%]">
+                    <a href="/activiteit" class="w-[35%]">
                         <div class="flex flex-wrap bg-gray-100 shadow-lg p-4 rounded-lg">
                             <div class="w-full h-[200px] bg-gray-300 rounded-t-lg"></div>
                             <div class="w-full p-4">
