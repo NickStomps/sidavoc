@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ActiviteitController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
@@ -33,6 +34,9 @@ Route::get('/activiteit', function () {
 
 Route::get('/activiteitBeheer', [\App\Http\Controllers\ActiviteitBeheerController::class, 'index'])->name('activiteitBeheer');
 Route::post('/activiteitBeheer/save',[\App\Http\Controllers\ActiviteitBeheerController::class,'store'])->name('activiteitBeheer.store');
+
+Route::get('/', [ActiviteitController::class, 'index']);
+Route::resource('activiteiten', ActiviteitController::class);
 
 Route::get('/account', function () {
     if(!Auth::check()) 
