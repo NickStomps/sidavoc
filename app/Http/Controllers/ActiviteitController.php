@@ -12,7 +12,8 @@ class ActiviteitController extends Controller
      */
     public function index()
     {
-        return view('activiteitBeheer');
+        $activiteiten = Activiteit::all();
+        return view('home', ['activiteiten' => $activiteiten]);
     }
 
     /**
