@@ -20,14 +20,48 @@
                         </a>
                      </li> 
                      <li>
-                        <a href="/account">
-                            <i class="fa-solid fa-user"></i>
+                        <a id="account">
+                            <i class="fa-solid fa-user"></i>    
+                            @auth
+                            {{Auth::user()->name }}
+                            @endauth
                         </a>
+                        <ul class="hidden" id="lijst">
+                            @auth
+                            <li>
+                                <a href="/logout">
+                                    uitloggen
+                                </a>
+                            </li>
+                            @endauth
+                            @auth
+                                <li>
+                                    <a href="/account">
+                                        account
+                                    </a>
+                                </li>
+                            @else
+                                <li>
+                                    <a href="/account">
+                                        login
+                                    </a>
+                                </li>
+                            @endauth
+                        </ul>
                      </li> 
                  </ul>
              </div>
             </div>
         @yield('content')
     </div>
+    <script>
+        var lijst = document.getElementById("lijst");
+        var account = document.getElementById("account")
+
+        account.onclick = function() {
+             lijst.classList.toggle('hidden');
+        }
+console.log("test")
+    </script>
 </body>
 </html>
