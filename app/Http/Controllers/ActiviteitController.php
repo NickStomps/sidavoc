@@ -12,7 +12,7 @@ class ActiviteitController extends Controller
      */
     public function index()
     {
-        $activiteit = activiteit::all();
+        $activiteit = activiteit::find(request('id'));
         return view('activiteitendetails', data: ['activiteit' => $activiteit]);
     }
 

@@ -4,10 +4,16 @@
 <div class="my-10 w-full flex items-center flex-col flex-wrap">
     <div class="w-full h-[200px] bg-gray-300 rounded-t-lg mb-10"></div>
     <div class="flex justify-between w-[80%] mx-[128px] mb-10">
-        <h1 class="text-3xl">Volleybal</h1>
+        <h1 class="text-3xl">{{$activiteit->naam_activiteit}}</h1>
         <button class="bg-[#EEAF00] rounded-md text-2xl">Inschrijven</button>
     </div>
-    <p class="text-xl mx-[128px]">Lorem ipsum dolor sit, amet consectetur adipisicing elit. A illo aliquid ipsum eius, praesentium ullam hic voluptatem! Quas perferendis, temporibus praesentium aspernatur, eaque velit quisquam, dolor ad ipsam architecto expedita.</p>
+    <p class="text-xl mx-[128px]">
+        @if ($activiteit->Details_activiteit == null)
+        Deze activiteit heeft geen beschrijving.
+        @else
+        {{$activiteit->Details_activiteit}}
+        @endif
+    </p>
     <div class="flex justify-between w-[80%] mx-[128px] mt-10 mb-10">
         <div class="flex flex-col">
             <h2 class="text-2xl">Locatie</h2>
@@ -15,24 +21,32 @@
         </div>
         <div class="flex flex-col">
             <h2 class="text-2xl">Datum</h2>
-            <p class="text-xl">12-12-2022</p>
+            <p class="text-xl">{{\Carbon\Carbon::parse($activiteit->Begin_activiteit)->format('Y-m-d H:i')}}</p>
         </div>
         <div class="flex flex-col">
             <h2 class="text-2xl">Tijd</h2>
-            <p class="text-xl">19:00 - 21:00</p>
+            <p class="text-xl">{{\Carbon\Carbon::parse($activiteit->Eind_activiteit)->format('Y-m-d H:i')}}</p>
         </div>
+        @if ($activiteit->Koster != null)
         <div class="flex flex-col">
             <h2 class="text-2xl">Kosten</h2>
-            <p class="text-xl">€5,-</p>
+            <p class="text-xl">€{{$activiteit->Kosten}},-</p>
         </div>
+        @endif
         <div class="flex flex-col">
             <h2 class="text-2xl">Aantal deelmeners</h2>
-            <p class="text-xl">6 / 30</p>
+            <p class="text-xl">0/ {{$activiteit->maximaal_deelnemers}}</p>
         </div>
         <div class="flex flex-col">
             <h2 class="text-2xl">Inclusief eten:</h2>
-            <p class="text-xl">Ja</p>
+            <p class="text-xl">
+                @if ($activiteit->Eten == 1)
+                Ja
+                @else
+                Nee
+                @endif
+            </p>
         </div>
     </div>
-
-    @endsection
+</div>
+@endsection

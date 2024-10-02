@@ -28,10 +28,10 @@ Route::get('/', function () {
     return view('home');
 });
 
-Route::get('/activiteit', function () {
+Route::get('/activiteitendetails', function () {
     return view('activiteitendetails');
 });
-Route::get(uri: '/activiteit', action: [ActiviteitController::class, 'index'])->name('activiteit');
+Route::get('/activiteitendetails/{id}', [ActiviteitController::class, 'index'])->name('activiteitendetails');
 
 Route::get('/activiteitBeheer', [\App\Http\Controllers\ActiviteitBeheerController::class, 'index'])->name('activiteitBeheer');
 Route::post('/activiteitBeheer/save', [\App\Http\Controllers\ActiviteitBeheerController::class, 'store'])->name('activiteitBeheer.store');
