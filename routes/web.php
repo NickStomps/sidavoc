@@ -32,20 +32,15 @@ Route::get('/activiteit', function () {
 });
 
 
-Route::get('/activiteitBeheer', [\App\Http\Controllers\ActiviteitBeheerController::class, 'index'])->name('activiteitBeheer');
-Route::post('/activiteitBeheer/save',[\App\Http\Controllers\ActiviteitBeheerController::class,'store'])->name('activiteitBeheer.store');
 
 Route::get('/', [ActiviteitController::class, 'index']);
 Route::resource('activiteiten', ActiviteitController::class);
 
-Route::get('/account', function () {
-    if(!Auth::check()) 
-    {
-        return view('login');
-    }
-    else
-    {
-        return view('account');
-    }
-});
 
+Route::middleware('auth')->group(function () {
+    Route::get('/account', function () {
+        return view('account');
+    });
+    Route::post('/activiteitBeheer/save',[\App\Http\Controllers\ActiviteitBeheerController::class,'store'])->name('activiteitBeheer.store');
+    Route::get('/activiteitBeheer', [\App\Http\Controllers\ActiviteitBeheerController::class, 'index'])->name('activiteitBeheer');
+});
