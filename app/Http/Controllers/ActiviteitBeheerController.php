@@ -52,7 +52,7 @@ class ActiviteitBeheerController extends Controller
         $imageName = null;
         if ($request->hasFile('image')) {
             $imageName = time() . '.' . $request->image->getClientOriginalExtension();
-            $request->image->storeAs('public/images', $imageName);
+            $request->image->storeAs('storage/app/public/images/', $imageName);
         }
     
         // Aanmaken van nieuwe activiteit
@@ -65,7 +65,7 @@ class ActiviteitBeheerController extends Controller
         $activiteit->eten_inclusief = $request->input('eten');
         $activiteit->Kosten = $request->input('kosten');
         $activiteit->maximaal_deelnemers = $request->input('maxDeelnemers');
-        $activiteit->image_path = $imageName ? '/storage/images/' . $imageName : null;
+        $activiteit->image_path = $imageName ? '/storage/app/public/images/' . $imageName : null;
     
         // Date validation with Carbon using Y-m-d format
         $startDate = Carbon::createFromFormat('Y-m-d\TH:i', $activiteit->Begin_activiteit);
