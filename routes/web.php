@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ActiviteitController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
@@ -30,6 +31,10 @@ Route::get('/activiteit', function () {
     return view('activiteitendetails');
 });
 
+
+
+Route::get('/', [ActiviteitController::class, 'index']);
+Route::resource('activiteiten', ActiviteitController::class);
 
 
 Route::middleware('auth')->group(function () {
