@@ -44,3 +44,5 @@ Route::middleware('auth')->group(function () {
     Route::post('/activiteitBeheer/save',[\App\Http\Controllers\ActiviteitBeheerController::class,'store'])->name('activiteitBeheer.store');
     Route::get('/activiteitBeheer', [\App\Http\Controllers\ActiviteitBeheerController::class, 'index'])->name('activiteitBeheer');
 });
+
+route::get("/activiteit/{activiteiten}", [\App\Http\Controllers\ActiviteitController::class, 'show'])->name('activiteitendetails');

@@ -9,7 +9,7 @@
     <div class="flex flex-wrap gap-4">
         @foreach ($activiteiten as $activiteit)
             <div class="w-[23%] mb-8">
-                <a href="/activiteit" class="transform bg-white w-full transition duration-500 hover:scale-105 flex justify-center items-center shadow-lg">
+                <a href="/activiteit/{{$activiteit->id}}" class="transform bg-white w-full transition duration-500 hover:scale-105 flex justify-center items-center shadow-lg">
                     <div class="w-full h-full flex flex-col justify-between">
                         <div class="w-full h-[200px] bg-gray-300 rounded-t-lg">
                             <img src="{{ Vite::asset($activiteit->image_path) }}" alt="Activiteit Image" class="w-full h-full object-cover rounded-t-lg">
