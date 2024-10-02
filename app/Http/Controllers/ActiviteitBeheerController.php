@@ -52,7 +52,7 @@ class ActiviteitBeheerController extends Controller
         $imageName = null;
         if ($request->hasFile('image')) {
             $imageName = time() . '.' . $request->image->getClientOriginalExtension();
-            $request->image->storeAs('storage/app/public/images/', $imageName);
+            $request->image->storeAs('images', $imageName);
         }
     
         // Aanmaken van nieuwe activiteit
