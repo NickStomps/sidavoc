@@ -32,7 +32,7 @@ Route::get('/', function () {
 Route::get('/activiteitendetails', function () {
     return view('activiteitendetails');
 });
-Route::get('/activiteitendetails/{id}', [ActiviteitController::class, 'index'])->name('activiteitendetails');
+Route::get('/activiteitendetails/{id}', [ActiviteitController::class, 'show'])->name('activiteitendetails');
 
 
 Route::get('/account', function () {
@@ -55,4 +55,5 @@ Route::middleware('auth')->group(function () {
     Route::post('/activiteitBeheer/save',[\App\Http\Controllers\ActiviteitBeheerController::class,'store'])->name('activiteitBeheer.store');
     Route::get('/activiteitBeheer', [\App\Http\Controllers\ActiviteitBeheerController::class, 'index'])->name('activiteitBeheer');
 });
+
 

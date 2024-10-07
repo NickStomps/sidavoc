@@ -39,8 +39,9 @@ class ActiviteitController extends Controller
      */
     public function show(activiteit $activiteit)
     {
+
          $activiteit = activiteit::find(request('id'));
-        return view('activiteitendetails', data: ['activiteit' => $activiteit]);
+         return view('activiteitendetails', data: ['activiteit' => $activiteit]);
     }
 
     /**
