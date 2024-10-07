@@ -2,12 +2,12 @@
 
 @section('content')
 <div class=" w-full flex items-center flex-col flex-wrap ">
-    <div class="w-[80%] mt-3 h-[20rem] bg-gray-300 rounded-lg mb-10">
+    <div class="w-[80%] mt-3 h-[19.4rem] bg-gray-300 rounded-lg mb-10">
         <img src="{{ $activiteit->image_path ? Vite::asset($activiteit->image_path) : Vite::asset('/resources/images/logo_covadis_2016.png') }}" alt="Activiteit Image" class="w-full rounded-lg h-full {{ $activiteit->image_path ? '' : 'object-scale-down' }}">    
     </div>
     <div class="flex justify-between w-[80%] mx-[128px] mb-10">
         <h1 class="text-3xl">{{$activiteit->naam_activiteit}}</h1>
-        <button class="bg-[#EEAF00] rounded-md text-2xl">Inschrijven</button>
+        <a href="/inschrijven/save"><div class="bg-[#EEAF00] p-2 rounded-md text-2xl">Inschrijven</div></a>
     </div>
     <p class="text-xl w-[80%] mx-[128px]">
         @if ($activiteit->Details_activiteit == null)
@@ -37,7 +37,7 @@
         @endif
         <div class="flex flex-col">
             <h2 class="text-2xl">Aantal deelmeners</h2>
-            <p class="text-xl">0/ {{$activiteit->maximaal_deelnemers}}</p>
+            <p class="text-xl">{{$activiteit->deelnemers}}/ {{$activiteit->maximaal_deelnemers}}</p>
         </div>
         <div class="flex flex-col">
             <h2 class="text-2xl">Inclusief eten:</h2>
