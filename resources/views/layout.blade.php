@@ -25,9 +25,36 @@
                      </li>
                      @endauth   
                      <li>
-                        <a href="/account">
-                            <i class="fa-solid fa-user"></i>
+                        <a id="account">
+                            <i class="fa-solid fa-user"></i>    
+                            @auth
+                            {{Auth::user()->name }}
+                            @endauth
                         </a>
+                        </div>
+                         </div>
+                        <ul class="hidden" id="lijst">
+                            @auth
+                                <li>
+                                    <a href="/account">
+                                        account
+                                    </a>
+                                </li>
+                            @else
+                                <li>
+                                    <a href="/account">
+                                        login
+                                    </a>
+                                </li>
+                            @endauth
+                            @auth
+                            <li>
+                                <a href="/logout">
+                                    uitloggen
+                                </a>
+                            </li>
+                            @endauth
+                        </ul>
                      </li> 
                  </ul>
              </div>
@@ -35,5 +62,25 @@
             
         @yield('content')
     </div>
+    <style>
+        #lijst
+        {
+            background-color: white ;
+            border: 2px, solid;
+            border-radius: 10px;
+            position: absolute;
+            margin-left: 70%;
+            padding: 5px;
+        }
+    </style>
+    <script>
+        var lijst = document.getElementById("lijst");
+        var account = document.getElementById("account")
+
+        account.onclick = function() {
+             lijst.classList.toggle('hidden');
+        }
+console.log("test")
+    </script>
 </body>
 </html>
