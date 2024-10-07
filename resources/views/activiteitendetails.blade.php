@@ -30,7 +30,6 @@
             <p class="text-xl">{{\Carbon\Carbon::parse($activiteit->Eind_activiteit)->format('Y-m-d H:i')}}</p>
         </div>
         @if ($activiteit->Kosten != null)
-        
         <div class="flex flex-col">
             <h2 class="text-2xl">Kosten</h2>
             <p class="text-xl">€{{$activiteit->Kosten}},-</p>
