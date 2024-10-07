@@ -31,7 +31,7 @@ Route::get('/activiteitendetails', function () {
     return view('activiteitendetails');
 });
 Route::get('/activiteitendetails/{id}', [App\Http\Controllers\ActiviteitController::class, 'show'])->name('activiteitendetails');
-
+Route::post('/inschrijven/save', [App\Http\Controllers\InschrijfController::class, 'store'])->name('Inschrijf.store');
 
 
 

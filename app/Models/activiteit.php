@@ -10,4 +10,9 @@ class activiteit extends Model
     use HasFactory;
 
     protected $table = 'activiteit';
+
+    public function Activiteiten()
+    {
+        return $this->hasMany(activiteit::class);
+    }
 }

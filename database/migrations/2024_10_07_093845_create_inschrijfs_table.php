@@ -10,19 +10,21 @@ return new class extends Migration
      * Run the migrations.
      */
     public function up(): void
-{
-    Schema::table('activiteit', function (Blueprint $table) {
-        $table->integer('deelnemers') ->default(0);
-    });
-}
+    {
+        Schema::create('inschrijf', function (Blueprint $table) {
+            $table->id();
+            $table->integer('activiteit_id');
+            $table->string('user_email');
+            $table->string('opmerking');
+            $table->timestamps();
+        });
+    }
 
     /**
      * Reverse the migrations.
      */
     public function down(): void
     {
-        Schema::table('activiteit', function (Blueprint $table) {
-            $table->dropColumn('deelnemers');
-        });
+        Schema::dropIfExists('inschrijf');
     }
 };
