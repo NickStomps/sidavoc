@@ -26,7 +26,7 @@
                         <p class="mt-2">{{ $activiteit->Details_activiteit }}</p>
                         <div class="flex justify-between mt-4 text-sm text-gray-500">
                             <span class="opacity-75">{{ $activiteit->Begin_activiteit }}</span>
-                            <span class="opacity-75">{{ $activiteit ->maximaal_deelnemers }}</span>
+                            <span class="opacity-75">{{$activiteit->deelnemers}}/{{ $activiteit ->maximaal_deelnemers }}</span>
                         </div>
                     </div>
                 </div>

@@ -37,7 +37,7 @@
         @endif
         <div class="flex flex-col">
             <h2 class="text-2xl">Aantal deelmeners</h2>
-            <p class="text-xl">0/ {{$activiteit->maximaal_deelnemers}}</p>
+            <p class="text-xl">{{$activiteit->deelnemers}}/ {{$activiteit->maximaal_deelnemers}}</p>
         </div>
         <div class="flex flex-col">
             <h2 class="text-2xl">Inclusief eten:</h2>
