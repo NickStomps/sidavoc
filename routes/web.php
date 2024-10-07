@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ActiviteitController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
@@ -33,8 +34,6 @@ Route::get('/activiteitendetails', function () {
 });
 Route::get('/activiteitendetails/{id}', [ActiviteitController::class, 'index'])->name('activiteitendetails');
 
-Route::get('/activiteitBeheer', [\App\Http\Controllers\ActiviteitBeheerController::class, 'index'])->name('activiteitBeheer');
-Route::post('/activiteitBeheer/save', [\App\Http\Controllers\ActiviteitBeheerController::class, 'store'])->name('activiteitBeheer.store');
 
 Route::get('/account', function () {
     if (!Auth::check()) {
@@ -43,3 +42,17 @@ Route::get('/account', function () {
         return view('account');
     }
 });
+
+
+Route::get('/', [ActiviteitController::class, 'index']);
+Route::resource('activiteiten', [ActiviteitController::class, 'show']);
+
+
+Route::middleware('auth')->group(function () {
+    Route::get('/account', function () {
+        return view('account');
+    });
+    Route::post('/activiteitBeheer/save',[\App\Http\Controllers\ActiviteitBeheerController::class,'store'])->name('activiteitBeheer.store');
+    Route::get('/activiteitBeheer', [\App\Http\Controllers\ActiviteitBeheerController::class, 'index'])->name('activiteitBeheer');
+});
+
