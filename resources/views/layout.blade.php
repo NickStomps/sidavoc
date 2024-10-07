@@ -18,7 +18,12 @@
                         <a href="/">
                             home
                         </a>
-                     </li> 
+                     </li>
+                     @auth
+                     <li>
+                        <a href="/activiteitBeheer">toevoegen</a>
+                     </li>
+                     @endauth   
                      <li>
                         <a id="account">
                             <i class="fa-solid fa-user"></i>    
@@ -54,6 +59,7 @@
                  </ul>
              </div>
             </div>
+            
         @yield('content')
     </div>
     <style>
