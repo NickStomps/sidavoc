@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ActiviteitController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,6 +17,7 @@ use App\Http\Controllers\AuthController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
 Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [AuthController::class, 'login']);
 Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
@@ -27,14 +29,23 @@ Route::get('/', function () {
     return view('home');
 });
 
-Route::get('/activiteit', function () {
+Route::get('/activiteitendetails', function () {
     return view('activiteitendetails');
+});
+Route::get('/activiteitendetails/{id}', [ActiviteitController::class, 'show'])->name('activiteitendetails');
+
+
+Route::get('/account', function () {
+    if (!Auth::check()) {
+        return view('login');
+    } else {
+        return view('account');
+    }
 });
 
 
-
 Route::get('/', [ActiviteitController::class, 'index']);
-Route::resource('activiteiten', ActiviteitController::class);
+Route::resource('activiteiten', [ActiviteitController::class, 'show']);
 
 
 Route::middleware('auth')->group(function () {
@@ -45,4 +56,4 @@ Route::middleware('auth')->group(function () {
     Route::get('/activiteitBeheer', [\App\Http\Controllers\ActiviteitBeheerController::class, 'index'])->name('activiteitBeheer');
 });
 
-route::get("/activiteit/{id}", [\App\Http\Controllers\ActiviteitController::class, 'show'])->name('activiteitendetails');
+
