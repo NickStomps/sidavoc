@@ -29,7 +29,7 @@
             <h2 class="text-2xl">Tijd</h2>
             <p class="text-xl">{{\Carbon\Carbon::parse($activiteit->Eind_activiteit)->format('Y-m-d H:i')}}</p>
         </div>
-        @if ($activiteit->Koster != null)
+        @if ($activiteit->Kosten != null)
         <div class="flex flex-col">
             <h2 class="text-2xl">Kosten</h2>
             <p class="text-xl">€{{$activiteit->Kosten}},-</p>
@@ -42,7 +42,7 @@
         <div class="flex flex-col">
             <h2 class="text-2xl">Inclusief eten:</h2>
             <p class="text-xl">
-                @if ($activiteit->Eten == 1)
+                @if ($activiteit->eten_inclusief == 1)
                 Ja
                 @else
                 Nee
