@@ -26,14 +26,9 @@
                             {{Auth::user()->name }}
                             @endauth
                         </a>
+                        </div>
+                         </div>
                         <ul class="hidden" id="lijst">
-                            @auth
-                            <li>
-                                <a href="/logout">
-                                    uitloggen
-                                </a>
-                            </li>
-                            @endauth
                             @auth
                                 <li>
                                     <a href="/account">
@@ -47,6 +42,13 @@
                                     </a>
                                 </li>
                             @endauth
+                            @auth
+                            <li>
+                                <a href="/logout">
+                                    uitloggen
+                                </a>
+                            </li>
+                            @endauth
                         </ul>
                      </li> 
                  </ul>
@@ -54,6 +56,17 @@
             </div>
         @yield('content')
     </div>
+    <style>
+        #lijst
+        {
+            background-color: white ;
+            border: 2px, solid;
+            border-radius: 10px;
+            position: absolute;
+            margin-left: 70%;
+            padding: 5px;
+        }
+    </style>
     <script>
         var lijst = document.getElementById("lijst");
         var account = document.getElementById("account")
