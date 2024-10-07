@@ -18,7 +18,7 @@
                             <h1 class="text-xl font-bold">{{ $activiteit->naam_activiteit }}</h1>
                             <p class="mt-2">{{ $activiteit->Details_activiteit }}</p>
                             <div class="flex justify-between mt-4 text-sm text-gray-500">
-                                <span class="opacity-75">{{ $activiteit->Begin_activiteit }}</span>
+                                <span class="opacity-75">{{ \Carbon\Carbon::parse($activiteit->Begin_activiteit)->format('Y-m-d H:i') }}</span>
                                 <span class="opacity-75">{{ $activiteit->maximaal_deelnemers }}</span>
                             </div>
                         </div>

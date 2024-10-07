@@ -45,4 +45,4 @@ Route::middleware('auth')->group(function () {
     Route::get('/activiteitBeheer', [\App\Http\Controllers\ActiviteitBeheerController::class, 'index'])->name('activiteitBeheer');
 });
 
-route::get("/activiteit/{activiteiten}", [\App\Http\Controllers\ActiviteitController::class, 'show'])->name('activiteitendetails');
+route::get("/activiteit/{id}", [\App\Http\Controllers\ActiviteitController::class, 'show'])->name('activiteitendetails');

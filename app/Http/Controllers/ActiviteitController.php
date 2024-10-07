@@ -37,7 +37,7 @@ class ActiviteitController extends Controller
      */
     public function show(activiteit $activiteit)
     {
-        return view('activiteitendetail', ['activiteit' => $activiteit]);
+        return view('activiteitendetails', ['activiteit' => $activiteit]);
     }
 
     /**
