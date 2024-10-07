@@ -67,9 +67,9 @@ class UsersController extends Controller
         if (!Auth::check()) {
             return view('login');
         }
-
+    
         $activiteiten = Activiteit::all(); // Fetch all activiteiten
-        return view('account', compact('activiteiten'));
+        return view('account', ['activiteiten' => $activiteiten]);
     }
 
     /**
