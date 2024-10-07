@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\activiteit;
 use Illuminate\Http\Request;
 
+use Illuminate\Support\Facades\Auth;
+use function PHPUnit\Framework\returnValue;
+
 class ActiviteitController extends Controller
 {
     /**
@@ -40,7 +43,8 @@ class ActiviteitController extends Controller
     public function show(activiteit $activiteit)
     {
          $activiteit = activiteit::find(request('id'));
-        return view('activiteitendetails', data: ['activiteit' => $activiteit]);
+         return view('activiteitendetails', data: ['activiteit' => $activiteit]);
+
     }
 
     /**
@@ -66,4 +70,7 @@ class ActiviteitController extends Controller
     {
         //
     }
+
+
 }
+

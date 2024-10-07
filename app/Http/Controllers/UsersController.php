@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\activiteit;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth as Auth;
 use PHPUnit\Framework\Attributes\Ticket;
 use Psy\CodeCleaner\FunctionReturnInWriteContextPass;
 
@@ -60,9 +62,14 @@ class UsersController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(user $users)
+    public function show(activiteit $activiteiten)
     {
-        //
+        if (!Auth::check()) {
+            return view('login');
+        }
+    
+        $activiteiten = activiteit::all(); 
+        return view('account', ['activiteiten' => $activiteiten]);
     }
 
     /**
