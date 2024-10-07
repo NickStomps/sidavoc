@@ -35,13 +35,9 @@ Route::get('/activiteitendetails', function () {
 Route::get('/activiteitendetails/{id}', [ActiviteitController::class, 'show'])->name('activiteitendetails');
 
 
-Route::get('/account', function () {
-    if (!Auth::check()) {
-        return view('login');
-    } else {
-        return view('account');
-    }
-});
+
+
+Route::get('/account', [\App\Http\Controllers\UsersController::class, 'show'])->name('account');
 
 
 Route::get('/', [ActiviteitController::class, 'index']);
