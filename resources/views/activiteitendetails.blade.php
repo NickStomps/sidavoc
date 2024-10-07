@@ -2,7 +2,9 @@
 
 @section('content')
 <div class="my-10 w-full flex items-center flex-col flex-wrap">
-    <div class="w-full h-[200px] bg-gray-300 rounded-t-lg mb-10"></div>
+    <div class="w-full h-[200px] bg-gray-300 rounded-t-lg mb-10">
+        <img src="{{ Vite::asset($activiteit->image_path) }}" alt="Activiteit Image" class="w-full h-full object-cover rounded-t-lg">
+    </div>
     <div class="flex justify-between w-[80%] mx-[128px] mb-10">
         <h1 class="text-3xl">{{$activiteit->naam_activiteit}}</h1>
         <button class="bg-[#EEAF00] rounded-md text-2xl">Inschrijven</button>

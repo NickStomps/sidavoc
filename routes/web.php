@@ -1,11 +1,9 @@
 <?php
 
-use App\Http\Controllers\ActiviteitController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\ActiviteitController;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,7 +30,7 @@ Route::get('/', function () {
 Route::get('/activiteitendetails', function () {
     return view('activiteitendetails');
 });
-Route::get('/activiteitendetails/{id}', [ActiviteitController::class, 'show'])->name('activiteitendetails');
+Route::get('/activiteitendetails/{id}', [App\Http\Controllers\ActiviteitController::class, 'show'])->name('activiteitendetails');
 
 
 
@@ -40,8 +38,8 @@ Route::get('/activiteitendetails/{id}', [ActiviteitController::class, 'show'])->
 Route::get('/account', [\App\Http\Controllers\UsersController::class, 'show'])->name('account');
 
 
-Route::get('/', [ActiviteitController::class, 'index']);
-Route::resource('activiteiten', [ActiviteitController::class, 'show']);
+Route::get('/', [App\Http\Controllers\ActiviteitController::class, 'index']);
+Route::get('activiteiten', [App\Http\Controllers\ActiviteitController::class, 'show'])->name('activiteiten');
 
 
 Route::middleware('auth')->group(function () {
@@ -51,5 +49,3 @@ Route::middleware('auth')->group(function () {
     Route::post('/activiteitBeheer/save',[\App\Http\Controllers\ActiviteitBeheerController::class,'store'])->name('activiteitBeheer.store');
     Route::get('/activiteitBeheer', [\App\Http\Controllers\ActiviteitBeheerController::class, 'index'])->name('activiteitBeheer');
 });
-
-

@@ -1,16 +1,7 @@
 @extends('layout')
 
 @section('content')
-<?php
-   /* $activiteiten = [
-        ['title' => 'Titel 1', 'description' => 'Beschrijving voorbeeld text 1', 'date' => '18/09/2024', 'deelnemers' => 14],
-        ['title' => 'Titel 2', 'description' => 'Beschrijving voorbeeld text 2', 'date' => '11/11/2024', 'deelnemers' => 20],
-        ['title' => 'Titel 3', 'description' => 'Beschrijving voorbeeld text 3', 'date' => '12/11/2024', 'deelnemers' => 30],
-        ['title' => 'Titel 4', 'description' => 'Beschrijving voorbeeld text 4', 'date' => '13/11/2024', 'deelnemers' => 25],
-        ['title' => 'Titel 5', 'description' => 'Beschrijving voorbeeld text 5, dit is een voorbeeld', 'date' => '14/11/2024', 'deelnemers' => 18],
-        ['title' => 'Titel 6', 'description' => 'Beschrijving voorbeeld text 6, dit is een voorbeeld', 'date' => '15/11/2024', 'deelnemers' => 16],
-    ];*/
-    ?>
+
 <div class="flex items-end flex-end flex-col mt-5 mb-10 mr-5">
     <h1 class="text-4xl font-bold mt-5 mb-10">Welkom {{ Auth::user()->name }}</h1>
     <p>Wachtwoord veranderen?</p>
