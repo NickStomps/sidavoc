@@ -62,13 +62,13 @@ class UsersController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(user $users)
+    public function show(activiteit $activiteiten)
     {
         if (!Auth::check()) {
             return view('login');
         }
     
-        $activiteiten = Activiteit::all(); // Fetch all activiteiten
+        $activiteiten = activiteit::all(); 
         return view('account', ['activiteiten' => $activiteiten]);
     }
 
