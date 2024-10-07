@@ -1,9 +1,11 @@
 <?php
 
+use App\Http\Controllers\ActiviteitController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ActiviteitController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,6 +17,7 @@ use App\Http\Controllers\AuthController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
 Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [AuthController::class, 'login']);
 Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
@@ -26,13 +29,27 @@ Route::get('/', function () {
     return view('home');
 });
 
-Route::get('/activiteit', function () {
+Route::get('/activiteitendetails', function () {
     return view('activiteitendetails');
 });
+Route::get('/activiteitendetails/{id}', [ActiviteitController::class, 'show'])->name('activiteitendetails');
 
 
-Route::get('/activiteitBeheer', [\App\Http\Controllers\ActiviteitBeheerController::class, 'index'])->name('activiteitBeheer');
-Route::post('/activiteitBeheer/save',[\App\Http\Controllers\ActiviteitBeheerController::class,'store'])->name('activiteitBeheer.store');
+
 
 Route::get('/account', [\App\Http\Controllers\UsersController::class, 'show'])->name('account');
+
+
+Route::get('/', [ActiviteitController::class, 'index']);
+Route::resource('activiteiten', [ActiviteitController::class, 'show']);
+
+
+Route::middleware('auth')->group(function () {
+    Route::get('/account', function () {
+        return view('account');
+    });
+    Route::post('/activiteitBeheer/save',[\App\Http\Controllers\ActiviteitBeheerController::class,'store'])->name('activiteitBeheer.store');
+    Route::get('/activiteitBeheer', [\App\Http\Controllers\ActiviteitBeheerController::class, 'index'])->name('activiteitBeheer');
+});
+
 

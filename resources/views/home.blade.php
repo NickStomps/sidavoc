@@ -2,51 +2,30 @@
 
 @section('content')  
 
-@php
-// Mock up data om te testen
-$activiteiten = [
-    ['title' => 'Titel 1', 'description' => 'Beschrijving voorbeeld text 1', 'date' => '18/09/2024', 'deelnemers' => 14],
-    ['title' => 'Titel 2', 'description' => 'Beschrijving voorbeeld text 2', 'date' => '11/11/2024', 'deelnemers' => 20],
-    ['title' => 'Titel 3', 'description' => 'Beschrijving voorbeeld text 3', 'date' => '12/11/2024', 'deelnemers' => 30],
-    ['title' => 'Titel 4', 'description' => 'Beschrijving voorbeeld text 4', 'date' => '13/11/2024', 'deelnemers' => 25],
-    ['title' => 'Titel 5', 'description' => 'Beschrijving voorbeeld text 5, dit is een voorbeeld', 'date' => '14/11/2024', 'deelnemers' => 18],
-];
-
-$vandaag = date('d/m/Y');
-
-@endphp
-
 {{-- Container --}}
 <div class="w-[80%] mx-auto mt-10">
 
     <h1 class="text-3xl font-bold mb-8">AANKOMENDE ACTIVITEITEN</h1>
-    @foreach ($activiteiten as $activiteit)
-        <div class="mb-8">
-            <div class="relative mb-4">
-                <div class="absolute inset-0 flex items-center">
-                    <div class="w-full border-t border-gray-300 opacity-50"></div>
-                </div>
-                <h2 class="relative text-2xl font-bold bg-white px-4">{{ \Carbon\Carbon::createFromFormat('d/m/Y', $activiteit['date'])->format('F j, Y') }}</h2>
-                <br>
-                <hr>
-            </div>
-            <div class="flex flex-wrap gap-4">
-                {{-- Card --}}
-                    <a href="/activiteit" class="w-[35%]">
-                        <div class="flex flex-wrap bg-gray-100 shadow-lg p-4 rounded-lg">
-                            <div class="w-full h-[200px] bg-gray-300 rounded-t-lg"></div>
-                            <div class="w-full p-4">
-                                <h1 class="text-xl font-bold">{{ $activiteit['title'] }}</h1>
-                                <p class="mt-2">{{ $activiteit['description'] }}</p>
-                                <div class="flex justify-between mt-4 text-sm text-gray-500">
-                                    <span class="opacity-75">{{ $activiteit['date'] }}</span>
-                                    <span class="opacity-75">Aantal deelnemers: {{ $activiteit['deelnemers'] }}</span>
-                                </div>
+    <div class="flex flex-wrap gap-4">
+        @foreach ($activiteiten as $activiteit)
+            <div class="w-[23%] mb-8">
+                <a href="/activiteit/{{$activiteit->id}}" class="transform bg-white w-full transition duration-500 hover:scale-105 flex justify-center items-center shadow-lg">
+                    <div class="w-full h-full flex flex-col justify-between">
+                        <div class="w-full h-[200px] bg-gray-300 rounded-t-lg">
+                            <img src="{{ Vite::asset($activiteit->image_path) }}" alt="Activiteit Image" class="w-full h-full object-cover rounded-t-lg">
+                        </div>
+                        <div class="w-full p-4">
+                            <h1 class="text-xl font-bold">{{ $activiteit->naam_activiteit }}</h1>
+                            <p class="mt-2">{{ $activiteit->Details_activiteit }}</p>
+                            <div class="flex justify-between mt-4 text-sm text-gray-500">
+                                <span class="opacity-75">{{ \Carbon\Carbon::parse($activiteit->Begin_activiteit)->format('Y-m-d H:i') }}</span>
+                                <span class="opacity-75">{{ $activiteit->maximaal_deelnemers }}</span>
                             </div>
                         </div>
-                    </a>
+                    </div>
+                </a>
             </div>
-        </div>
-    @endforeach
+        @endforeach
+    </div>
 </div>
 @endsection

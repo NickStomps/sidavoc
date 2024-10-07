@@ -15,7 +15,10 @@ class ActiviteitController extends Controller
      */
     public function index()
     {
-        return view('activiteitBeheer');
+
+        $activiteiten = Activiteit::all();
+        return view('home', ['activiteiten' => $activiteiten]);
+
     }
 
     /**
@@ -39,7 +42,9 @@ class ActiviteitController extends Controller
      */
     public function show(activiteit $activiteit)
     {
-        
+         $activiteit = activiteit::find(request('id'));
+         return view('activiteitendetails', data: ['activiteit' => $activiteit]);
+
     }
 
     /**
@@ -68,3 +73,4 @@ class ActiviteitController extends Controller
 
 
 }
+
