@@ -36,9 +36,10 @@ class InschrijfController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(inschrijf $inschrijf)
+    public function show(inschrijf $deelnemers)
     {
-        //
+        $deelnemers = inschrijf::where('activiteit_id', request('id'))->get();
+        return view('deelnemers', ['deelnemers' => $deelnemers]);
     }
 
     /**

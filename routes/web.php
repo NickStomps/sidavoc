@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\InschrijfController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,6 +31,7 @@ Route::get('/', function () {
 Route::get('/activiteitendetails', function () {
     return view('activiteitendetails');
 });
+Route::get('/deelnemers/{id}', [InschrijfController::class, 'show'])->name('deelnemers');
 Route::get('/activiteitendetails/{id}', [App\Http\Controllers\ActiviteitController::class, 'show'])->name('activiteitendetails');
 Route::post('/inschrijven/save', [App\Http\Controllers\InschrijfController::class, 'store'])->name('Inschrijf.store');
 
@@ -44,6 +46,6 @@ Route::get('activiteiten', [App\Http\Controllers\ActiviteitController::class, 's
 
 Route::middleware('auth')->group(function () {
     Route::get('/account', [\App\Http\Controllers\UsersController::class, 'show'])->name('account');
-    Route::post('/activiteitBeheer/save',[\App\Http\Controllers\ActiviteitBeheerController::class,'store'])->name('activiteitBeheer.store');
+    Route::post('/activiteitBeheer/save', [\App\Http\Controllers\ActiviteitBeheerController::class, 'store'])->name('activiteitBeheer.store');
     Route::get('/activiteitBeheer', [\App\Http\Controllers\ActiviteitBeheerController::class, 'index'])->name('activiteitBeheer');
 });
