@@ -4,7 +4,29 @@
 
 {{-- Container --}}
 <div class="w-[80%] mx-auto mt-10">
+    {{-- @if(\Session::has('succes'))
+        <div class="bg-green-600 rounded w-1/2 m-auto text-center border-black border">
+            <p class="text-white text-lg m-2">{!! \Session::get('bericht') !!}</p>
+        </div>
+    @endif
 
+    @if(\Session::has('error'))
+        <div class="bg-red-600 rounded w-1/2 m-auto text-center border-black border"> 
+            <p class="text-white text-lg m-2">{!! \Session::get('error') !!}</p>
+        </div>
+    @endif --}}
+
+    @if(session()->has('success'))
+    <div class="bg-green-600 rounded w-1/2 m-auto text-center border-black border">
+        <p class="text-white text-lg m-2">{{ session('success') }}</p>
+    </div>
+@endif
+
+@if(session()->has('error'))
+    <div class="bg-red-600 rounded w-1/2 m-auto text-center border-black border"> 
+        <p class="text-white text-lg m-2">{{ session('error') }}</p>
+    </div>
+@endif
     <h1 class="text-3xl font-bold mb-8">AANKOMENDE ACTIVITEITEN</h1>
     <div class="flex flex-wrap gap-4">
         @foreach ($activiteiten as $activiteit)

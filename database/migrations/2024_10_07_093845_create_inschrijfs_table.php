@@ -14,8 +14,10 @@ return new class extends Migration
         Schema::create('inschrijf', function (Blueprint $table) {
             $table->id();
             $table->integer('activiteit_id');
-            $table->string('user_email');
-            $table->string('opmerking');
+            $table->integer ('user_id')->nullable(); 
+            $table->string('user_email')->nullable();
+            $table->string('naam')->nullable();
+            $table->string('opmerking')->nullable();
             $table->timestamps();
         });
     }
