@@ -40,6 +40,16 @@
             <input class="form-input" type="password" name="password_confirmation" id="password_confirmation" required>
         </div>
 
+        <div>
+            <label class="form-label" for="roleId">Roles</label>
+            <input class="form-input" list='roles' name="roleId" id="roleId" required>
+            <datalist id="roles">
+                @foreach ($roles as $role)
+                    <option value="{{ $role->id }}">{{ $role->role }}</option>
+                @endforeach
+            </datalist>
+        </div>
+
         <button class="form-button" type="submit">Registreer</button>
     </form>
     <style>
