@@ -7,7 +7,13 @@
     </div>
     <div class="flex justify-between w-[80%] mx-[128px] mb-10">
         <h1 class="text-3xl">{{$activiteit->naam_activiteit}}</h1>
+        <div>
+        @auth
+            <button class="bg-[#EEAF00] rounded-md text-2xl">Verwijderen</button>
+            <a href="/activiteitBeheerEdit/{{$activiteit->id}}" class="bg-[#EEAF00] rounded-md text-2xl">Aanpassen</a>
+        @endauth
         <button class="bg-[#EEAF00] rounded-md text-2xl">Inschrijven</button>
+        </div>
     </div>
     <p class="text-xl w-[80%] mx-[128px]">
         @if ($activiteit->Details_activiteit == null)
@@ -42,7 +48,7 @@
         <div class="flex flex-col">
             <h2 class="text-2xl">Inclusief eten:</h2>
             <p class="text-xl">
-                @if ($activiteit->Eten == 1)
+                @if ($activiteit->eten_inclusief == 1)
                 Ja
                 @else
                 Nee

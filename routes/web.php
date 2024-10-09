@@ -46,4 +46,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/account', [\App\Http\Controllers\UsersController::class, 'show'])->name('account');
     Route::post('/activiteitBeheer/save',[\App\Http\Controllers\ActiviteitBeheerController::class,'store'])->name('activiteitBeheer.store');
     Route::get('/activiteitBeheer', [\App\Http\Controllers\ActiviteitBeheerController::class, 'index'])->name('activiteitBeheer');
+    Route::put('/activiteitBeheerEdit/update/{id}',[\App\Http\Controllers\ActiviteitBeheerEditController::class,'update'])->name('activiteitBeheerEdit.update');
+    Route::get('/activiteitBeheerEdit', [\App\Http\Controllers\ActiviteitBeheerEditController::class, 'index'])->name('activiteitBeheerEdit');
+    Route::get('/activiteitBeheerEdit/{id}', [App\Http\Controllers\ActiviteitBeheerEditController::class, 'show'])->name('activiteitBeheerEdit.show');
 });
