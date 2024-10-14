@@ -23,25 +23,25 @@
             <button type="submit" class="bg-red-600 p-2 rounded-md text-2xl cursor-pointer">Uitschrijven</button>
         </form>
         @else
-            @if($activiteit->deelnemers < $activiteit->maximaal_deelnemers)
-                @if(auth()->check())
-                    <!-- Als de gebruiker is ingelogd, toon knop voor inschrijving zonder email -->
-                    <div class="bg-[#EEAF00] p-2 rounded-md text-2xl cursor-pointer" onclick="openAuthModal()">Inschrijven</div>
-                @else
-                    <!-- Als de gebruiker niet is ingelogd, vraag om email en naam -->
-                    <div class="bg-[#EEAF00] p-2 rounded-md text-2xl cursor-pointer" onclick="openModal()">Inschrijven</div>
-                @endif
+        @if($activiteit->deelnemers < $activiteit->maximaal_deelnemers)
+            @if(auth()->check())
+            <!-- Als de gebruiker is ingelogd, toon knop voor inschrijving zonder email -->
+            <div class="bg-[#EEAF00] p-2 rounded-md text-2xl cursor-pointer" onclick="openAuthModal()">Inschrijven</div>
             @else
-                <p class="text-2xl text-red-600">Deze activiteit is vol</p>
+            <!-- Als de gebruiker niet is ingelogd, vraag om email en naam -->
+            <div class="bg-[#EEAF00] p-2 rounded-md text-2xl cursor-pointer" onclick="openModal()">Inschrijven</div>
             @endif
-        @endif
+            @else
+            <p class="text-2xl text-red-600">Deze activiteit is vol</p>
+            @endif
+            @endif
     </div>
 
     <p class="text-xl w-[80%] mx-[128px]">
         @if ($activiteit->Details_activiteit == null)
-            Deze activiteit heeft geen beschrijving.
+        Deze activiteit heeft geen beschrijving.
         @else
-            {{ $activiteit->Details_activiteit }}
+        {{ $activiteit->Details_activiteit }}
         @endif
     </p>
 
@@ -72,9 +72,9 @@
             <h2 class="text-2xl">Inclusief eten:</h2>
             <p class="text-xl">
                 @if ($activiteit->eten_inclusief == 1)
-                    Ja
+                Ja
                 @else
-                    Nee
+                Nee
                 @endif
             </p>
         </div>
@@ -129,11 +129,12 @@
         }
     });
 
-    function openAuthModal(){
+    function openAuthModal() {
         document.getElementById('authModal').classList.remove('hidden');
         document.getElementById('authModal').classList.add('flex');
     }
-    function closeAuthModal(){
+
+    function closeAuthModal() {
         document.getElementById('authModal').classList.add('hidden');
         document.getElementById('authModal').classList.remove('flex');
     }
