@@ -1,3 +1,6 @@
+<?php
+    use Illuminate\Support\Facades\Auth;
+?>
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
@@ -20,9 +23,11 @@
                         </a>
                      </li>
                      @auth
+                     @if(Auth::user()->roleId == 2)           
                      <li>
                         <a href="/activiteitBeheer">toevoegen</a>
-                     </li>
+                     </li>     
+                    @endif
                      @endauth   
                      <li>
                         <a id="account">
