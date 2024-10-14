@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ActiviteitBeheerEditController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
@@ -49,4 +50,5 @@ Route::middleware('auth')->group(function () {
     Route::put('/activiteitBeheerEdit/update/{id}',[\App\Http\Controllers\ActiviteitBeheerEditController::class,'update'])->name('activiteitBeheerEdit.update');
     Route::get('/activiteitBeheerEdit', [\App\Http\Controllers\ActiviteitBeheerEditController::class, 'index'])->name('activiteitBeheerEdit');
     Route::get('/activiteitBeheerEdit/{id}', [App\Http\Controllers\ActiviteitBeheerEditController::class, 'show'])->name('activiteitBeheerEdit.show');
+    Route::delete('/activiteitBeheer/delete/{id}', [App\Http\Controllers\ActiviteitBeheerController::class, 'destroy'])->name('activiteitBeheer.destroy');
 });
