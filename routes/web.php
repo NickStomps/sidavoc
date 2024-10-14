@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ActiviteitBeheerEditController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\AuthController;
@@ -36,6 +37,12 @@ Route::post('/inschrijven/save', [App\Http\Controllers\InschrijfController::clas
 Route::post('/uitschrijven', [App\Http\Controllers\InschrijfController::class, 'uitschrijven'])->name('uitschrijven');
 
 Route::middleware('auth')->group(function () {
+    Route::put('/activiteitBeheerEdit/update/{id}',[\App\Http\Controllers\ActiviteitBeheerEditController::class,'update'])->name('activiteitBeheerEdit.update');
+    Route::get('/activiteitBeheerEdit', [\App\Http\Controllers\ActiviteitBeheerEditController::class, 'index'])->name('activiteitBeheerEdit');
+    Route::get('/activiteitBeheerEdit/{id}', [App\Http\Controllers\ActiviteitBeheerEditController::class, 'show'])->name('activiteitBeheerEdit.show');
+    Route::delete('/activiteitBeheer/delete/{id}', [App\Http\Controllers\ActiviteitBeheerController::class, 'destroy'])->name('activiteitBeheer.destroy');
+});
+
     Route::get('/overzicht', [\App\Http\Controllers\UsersController::class, 'show'])->name('overzicht');
     Route::middleware(['auth', 'roles:2'])->group(function () {
         Route::get('/activiteitBeheer', [\App\Http\Controllers\ActiviteitBeheerController::class, 'index'])->name('activiteitBeheer');
