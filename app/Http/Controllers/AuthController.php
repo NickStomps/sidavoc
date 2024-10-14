@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\role;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
@@ -27,7 +28,7 @@ class AuthController extends Controller
         // attempt to log the user in
         if (Auth::attempt($credentials)) {
             // Login success
-            return redirect()->intended('/account');
+            return redirect()->intended('/overzicht');
         }
 
         // login failed
@@ -36,7 +37,8 @@ class AuthController extends Controller
 
     public function showRegistrationForm()
     {
-        return view('register');
+        $roles = role::all();
+        return view('register', ['roles' => $roles]);
     }
 
     public function register(Request $request)
@@ -44,18 +46,20 @@ class AuthController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
+            'roleId' => 'required|integer',
             'password' => 'required|string|min:8|confirmed',
         ]);
 
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
+            'roleId' => $request->roleId,
             'password' => bcrypt($request->password),
         ]);
 
         Auth::login($user);
 
-        return redirect('/account');
+        return redirect('/overzicht');
     }
 
     public function logout()

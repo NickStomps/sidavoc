@@ -1,10 +1,13 @@
+<?php
+    use Illuminate\Support\Facades\Auth;
+?>
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Actievadus</title>
+    <title>Sidavoc</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
@@ -20,9 +23,11 @@
                         </a>
                      </li>
                      @auth
+                     @if(Auth::user()->roleId == 2)           
                      <li>
                         <a href="/activiteitBeheer">toevoegen</a>
-                     </li>
+                     </li>     
+                    @endif
                      @endauth   
                      <li>
                         <a id="account">
@@ -36,13 +41,13 @@
                         <ul class="hidden" id="lijst">
                             @auth
                                 <li>
-                                    <a href="/account">
-                                        account
+                                    <a href="/overzicht">
+                                        overzicht
                                     </a>
                                 </li>
                             @else
                                 <li>
-                                    <a href="/account">
+                                    <a href="/overzicht">
                                         login
                                     </a>
                                 </li>

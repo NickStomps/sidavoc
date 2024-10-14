@@ -22,4 +22,10 @@ class activiteit extends Model
         'maximaal_deelnemers',
         'image_path',
     ];
+
+    public function Activiteiten()
+    {
+        return $this->hasMany(activiteit::class);
+    }
+
 }
