@@ -20,6 +20,7 @@ use App\Http\Controllers\InschrijfController;
 
 Route::middleware(['auth', 'roles:2'])->group(function () {
     Route::get('/deelnemers/{id}', [InschrijfController::class, 'show'])->name('deelnemers');
+    Route::delete('/deelnemers/delete/{id}', [InschrijfController::class, 'destroy'])->name('deelnemers.destroy');
 });
 
 Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
