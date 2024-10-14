@@ -115,8 +115,11 @@ class ActiviteitBeheerController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(activiteitBeheer $activiteitBeheer)
+    public function destroy($id)
     {
-        //
+        $activiteit = Activiteit::findOrFail($id);
+        $activiteit->delete();
+
+        return redirect('/')->with('bericht', 'Activiteit succesvol verwijderd.');
     }
 }
