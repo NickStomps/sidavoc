@@ -17,6 +17,10 @@ use App\Http\Controllers\InschrijfController;
 |
 */
 
+Route::middleware(['auth', 'role:1'])->group(function () {
+    Route::get('/deelnemers/{id}', [InschrijfController::class, 'show'])->name('deelnemers');
+});
+
 Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [AuthController::class, 'login']);
 Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
@@ -31,7 +35,6 @@ Route::get('/', function () {
 Route::get('/activiteitendetails', function () {
     return view('activiteitendetails');
 });
-Route::get('/deelnemers/{id}', [InschrijfController::class, 'show'])->name('deelnemers');
 Route::get('/activiteitendetails/{id}', [App\Http\Controllers\ActiviteitController::class, 'show'])->name('activiteitendetails');
 Route::post('/inschrijven/save', [App\Http\Controllers\InschrijfController::class, 'store'])->name('Inschrijf.store');
 
@@ -45,7 +48,9 @@ Route::get('activiteiten', [App\Http\Controllers\ActiviteitController::class, 's
 
 
 Route::middleware('auth')->group(function () {
-    Route::get('/account', [\App\Http\Controllers\UsersController::class, 'show'])->name('account');
-    Route::post('/activiteitBeheer/save', [\App\Http\Controllers\ActiviteitBeheerController::class, 'store'])->name('activiteitBeheer.store');
-    Route::get('/activiteitBeheer', [\App\Http\Controllers\ActiviteitBeheerController::class, 'index'])->name('activiteitBeheer');
+    Route::get('/overzicht', [\App\Http\Controllers\UsersController::class, 'show'])->name('overzicht');
+    Route::middleware(['auth', 'role:1'])->group(function () {
+        Route::get('/activiteitBeheer', [\App\Http\Controllers\ActiviteitBeheerController::class, 'index'])->name('activiteitBeheer');
+        Route::post('/activiteitBeheer/save', [\App\Http\Controllers\ActiviteitBeheerController::class, 'store'])->name('activiteitBeheer.store');
+    });
 });
