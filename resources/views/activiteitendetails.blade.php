@@ -7,13 +7,14 @@
     </div>
     <div class="flex justify-between w-[80%] mx-[128px] mb-10">
         <h1 class="text-3xl">{{$activiteit->naam_activiteit}}</h1>
-        <div>
-        @auth
-            <div onclick="openDeleteModal()" class="bg-[#EEAF00] rounded-md text-2xl cursor-pointer">Verwijderen</div>
-            <a href="/activiteitBeheerEdit/{{$activiteit->id}}" class="bg-[#EEAF00] rounded-md text-2xl">Aanpassen</a>
-        @endauth
-        <button class="bg-[#EEAF00] rounded-md text-2xl">Inschrijven</button>
+        <div class="flex space-x-2">
+            @auth
+                <div onclick="openDeleteModal()" class="bg-[#EEAF00] rounded-md text-2xl cursor-pointer flex items-center justify-center px-4 py-2">Verwijderen</div>
+                <a href="/activiteitBeheerEdit/{{$activiteit->id}}" class="bg-[#EEAF00] rounded-md text-2xl flex items-center justify-center px-4 py-2">Aanpassen</a>
+            @endauth
+            <button class="bg-[#EEAF00] rounded-md text-2xl flex items-center justify-center px-4 py-2">Inschrijven</button>
         </div>
+    </div>
     </div>
     <p class="text-xl w-[80%] mx-[128px]">
         @if ($activiteit->Details_activiteit == null)
