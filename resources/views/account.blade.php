@@ -12,7 +12,6 @@
 </div>
 <div class="all-activiteit flex content-around justify-center gap-4 flex-wrap w-[100%] mx-auto flex-row mb-10">
     <div class="w-[80%] mx-auto mt-10">
-
         <h1 class="text-3xl font-bold mb-8">AANKOMENDE ACTIVITEITEN</h1>
         <div class="flex flex-wrap gap-4">
             @foreach ($activiteiten as $activiteit)
