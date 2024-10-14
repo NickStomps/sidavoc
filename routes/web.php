@@ -36,7 +36,7 @@ Route::post('/inschrijven/save', [App\Http\Controllers\InschrijfController::clas
 Route::post('/uitschrijven', [App\Http\Controllers\InschrijfController::class, 'uitschrijven'])->name('uitschrijven');
 
 Route::middleware('auth')->group(function () {
-    Route::get('/overzicht', [\App\Http\Controllers\UsersController::class, 'show'])->name('overzicht');
+    Route::get('/overzicht', [\App\Http\Controllers\InschrijfController::class, 'showIngeschrevenActieviteit'])->name('overzicht');
     Route::middleware(['auth', 'roles:2'])->group(function () {
         Route::get('/activiteitBeheer', [\App\Http\Controllers\ActiviteitBeheerController::class, 'index'])->name('activiteitBeheer');
         Route::post('/activiteitBeheer/save', [\App\Http\Controllers\ActiviteitBeheerController::class, 'store'])->name('activiteitBeheer.store');

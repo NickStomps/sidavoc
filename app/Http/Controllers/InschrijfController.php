@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\activiteit;
 use App\Models\inschrijf;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log; 
 
@@ -78,6 +79,13 @@ class InschrijfController extends Controller
     }
 
 
+    public function showIngeschrevenActieviteit(){
+        $activiteit = activiteit::all();
+        $inschrijvingen = inschrijf::all();
+        $user = User::all();
+
+        return view('account', ['activiteiten' => $activiteit, 'inschrijvingen' => $inschrijvingen, 'user' => $user]);
+    }   
     public function showActiviteit($activiteit_id)
     {
         try {
