@@ -50,6 +50,7 @@ class InschrijfController extends Controller
             $inschrijf = new inschrijf();
             $inschrijf->activiteit_id = $request->activiteit_id;
             $inschrijf->opmerking = $request->opmerking;
+           
 
             // als de gebruiker is geauthenticeerd, gebruik user_id en user_email
             if (auth()->check()) {
@@ -65,6 +66,10 @@ class InschrijfController extends Controller
 
             // Save the inschrijving
             $inschrijf->save();
+
+            $activiteit = activiteit::find($request->activiteit_id);
+            $activiteit->deelnemers += 1;
+            $activiteit->save();
 
             return redirect()->back()->with('success', 'Je bent succesvol ingeschreven.');
         } catch (\Exception $e) {
@@ -103,33 +108,37 @@ class InschrijfController extends Controller
         }
     }
     public function uitschrijven(Request $request)
-{
-    $request->validate([
-        'activiteit_id' => 'required|integer',
-    ]);
+    {
+        $request->validate([
+            'activiteit_id' => 'required|integer',
+        ]);
 
-    try {
-        // Controleer of de gebruiker ingelogd is
-        if (auth()->check()) {
-            // Uitschrijven voor ingelogde gebruiker
-            inschrijf::where('activiteit_id', $request->activiteit_id)
-                ->where('user_id', auth()->user()->id)
-                ->delete();
-        } else {
-            // Uitschrijven voor gast op basis van e-mail in sessie
-            $guestEmail = session('guest_email');
-            inschrijf::where('activiteit_id', $request->activiteit_id)
-                ->where('user_email', $guestEmail)
-                ->delete();
+        try {
+            // Controleer of de gebruiker ingelogd is
+            if (auth()->check()) {
+                // Uitschrijven voor ingelogde gebruiker
+                inschrijf::where('activiteit_id', $request->activiteit_id)
+                    ->where('user_id', auth()->user()->id)
+                    ->delete();
+            } else {
+                // Uitschrijven voor gast op basis van e-mail in sessie
+                $guestEmail = session('guest_email');
+                inschrijf::where('activiteit_id', $request->activiteit_id)
+                    ->where('user_email', $guestEmail)
+                    ->delete();
+            }
+
+            $activiteit = activiteit::find($request->activiteit_id);
+            $activiteit->deelnemers -= 1;
+            $activiteit->save();
+            
+            // Redirect terug naar de homepagina met succesmelding
+            return redirect('/')->with('success', 'Je bent succesvol uitgeschreven.');
+        } catch (\Exception $e) {
+            // Redirect terug naar de homepagina met foutmelding
+            return redirect('/')->with('error', 'Er is iets misgegaan bij het uitschrijven.');
         }
-
-        // Redirect terug naar de homepagina met succesmelding
-        return redirect('/')->with('success', 'Je bent succesvol uitgeschreven.');
-    } catch (\Exception $e) {
-        // Redirect terug naar de homepagina met foutmelding
-        return redirect('/')->with('error', 'Er is iets misgegaan bij het uitschrijven.');
     }
-}
     /**
      * Display the specified resource.
      */
