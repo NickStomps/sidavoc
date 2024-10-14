@@ -7,6 +7,19 @@
     </div>
 
     <div class="flex justify-between w-[80%] mx-[128px] mb-10">
+        <h1 class="text-3xl">{{$activiteit->naam_activiteit}}</h1>
+        <!-- check if the user that is logged in and the role that they have is admin -->
+         @auth
+        @if(Auth::user()->roleId == 1)
+        <a href="/deelnemers/{{$activiteit->id}}">
+            <div class="bg-[#EEAF00] p-2 rounded-md text-2xl">Deelnemers</div>
+        </a>
+        @endif
+        @endauth
+        <a href="/inschrijven/save">
+            <div class="bg-[#EEAF00] p-2 rounded-md text-2xl">Inschrijven</div>
+        </a>
+
         <h1 class="text-3xl">{{ $activiteit->naam_activiteit }}</h1>
 
         @if($isIngeschreven)

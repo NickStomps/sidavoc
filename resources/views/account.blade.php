@@ -1,12 +1,6 @@
 @extends('layout')
 
 @section('content')
-
-<div class="flex items-end flex-end flex-col mt-5 mb-10 mr-5">
-    <h1 class="text-4xl font-bold mt-5 mb-10">Welkom {{ Auth::user()->name }}</h1>
-    <p>Wachtwoord veranderen?</p>
-    <a href="/logout">Uitloggen?</a>
-</div>
 <div class="flex justify-center mt-5 mb-10">
     <h1 class="text-4xl font-bold">events waar je aan deelneemt</h1>
 </div>
