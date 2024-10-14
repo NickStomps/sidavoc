@@ -28,7 +28,7 @@ class AuthController extends Controller
         // attempt to log the user in
         if (Auth::attempt($credentials)) {
             // Login success
-            return redirect()->intended('/account');
+            return redirect()->intended('/overzicht');
         }
 
         // login failed
@@ -37,7 +37,7 @@ class AuthController extends Controller
 
     public function showRegistrationForm()
     {
-        $roles = role::all(); 
+        $roles = role::all();
         return view('register', ['roles' => $roles]);
     }
 
@@ -59,7 +59,7 @@ class AuthController extends Controller
 
         Auth::login($user);
 
-        return redirect('/account');
+        return redirect('/overzicht');
     }
 
     public function logout()
