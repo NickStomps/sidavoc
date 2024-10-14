@@ -70,7 +70,7 @@ class InschrijfController extends Controller
             $activiteit = activiteit::find($request->activiteit_id);
             $activiteit->deelnemers += 1;
             $activiteit->save();
-
+            
             return redirect()->back()->with('success', 'Je bent succesvol ingeschreven.');
         } catch (\Exception $e) {
             return redirect()->route('activiteitendetails', ['id' => $request->activiteit_id])->with('error', $e->getMessage());
@@ -129,8 +129,14 @@ class InschrijfController extends Controller
             }
 
             $activiteit = activiteit::find($request->activiteit_id);
-            $activiteit->deelnemers -= 1;
-            $activiteit->save();
+            if($activiteit->deelnemers > 0){
+                $activiteit->deelnemers -= 1;
+                $activiteit->save();
+            }
+            else{
+                return redirect('/')->with('error', 'Er is iets misgegaan bij het uitschrijven.');
+            }
+            
             
             // Redirect terug naar de homepagina met succesmelding
             return redirect('/')->with('success', 'Je bent succesvol uitgeschreven.');

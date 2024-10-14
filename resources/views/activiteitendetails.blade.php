@@ -16,12 +16,16 @@
             <button type="submit" class="bg-red-600 p-2 rounded-md text-2xl cursor-pointer">Uitschrijven</button>
         </form>
         @else
-            @if(auth()->check())
-                <!-- Als de gebruiker is ingelogd, toon knop voor inschrijving zonder email -->
-                <div class="bg-[#EEAF00] p-2 rounded-md text-2xl cursor-pointer" onclick="openAuthModal()">Inschrijven</div>
+            @if($activiteit->deelnemers < $activiteit->maximaal_deelnemers)
+                @if(auth()->check())
+                    <!-- Als de gebruiker is ingelogd, toon knop voor inschrijving zonder email -->
+                    <div class="bg-[#EEAF00] p-2 rounded-md text-2xl cursor-pointer" onclick="openAuthModal()">Inschrijven</div>
+                @else
+                    <!-- Als de gebruiker niet is ingelogd, vraag om email en naam -->
+                    <div class="bg-[#EEAF00] p-2 rounded-md text-2xl cursor-pointer" onclick="openModal()">Inschrijven</div>
+                @endif
             @else
-                <!-- Als de gebruiker niet is ingelogd, vraag om email en naam -->
-                <div class="bg-[#EEAF00] p-2 rounded-md text-2xl cursor-pointer" onclick="openModal()">Inschrijven</div>
+                <p class="text-2xl text-red-600">Deze activiteit is vol</p>
             @endif
         @endif
     </div>
