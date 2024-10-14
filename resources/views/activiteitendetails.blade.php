@@ -8,14 +8,18 @@
 
     <div class="flex justify-between w-[80%] mx-[128px] mb-10">
         <h1 class="text-3xl">{{$activiteit->naam_activiteit}}</h1>
-        <!-- check if the user that is logged in and the role that they have is admin -->
-         @auth
-        @if(Auth::user()->roleId == 2)
-        <a href="/deelnemers/{{$activiteit->id}}">
-            <div class="bg-[#EEAF00] p-2 rounded-md text-2xl">Deelnemers</div>
-        </a>
-        @endif
-        @endauth
+        <div class="flex space-x-2">
+            <!-- kijken of de rol van de gebruiker gelijk is aan de id van de admin rol -->
+            @auth
+                @if ((Auth::user()->roleId == 2))
+                    <div onclick="openDeleteModal()" class="bg-[#EEAF00] rounded-md text-2xl cursor-pointer flex items-center justify-center px-4 py-2">Verwijderen</div>
+                    <a href="/activiteitBeheerEdit/{{$activiteit->id}}" class="bg-[#EEAF00] rounded-md text-2xl flex items-center justify-center px-4 py-2">Aanpassen</a>
+                    <a href="/deelnemers/{{$activiteit->id}}">
+                        <div class="bg-[#EEAF00] rounded-md text-2xl flex items-center justify-center px-4 py-2">Deelnemers</div>
+                    </a>
+                @endif
+            @endauth
+        </div>
         @if($isIngeschreven)
         <form action="{{ route('uitschrijven') }}" method="POST">
             @csrf
@@ -47,25 +51,25 @@
 
     <div class="flex justify-between w-[80%] mx-[128px] mt-10 mb-10">
         <div class="flex flex-col">
-            <h2 class="text-2xl">Locatie</h2>
+            <h2 class="text-2xl">Locatie:</h2>
             <p class="text-xl">{{ $activiteit->Locatie_activiteit }}</p>
         </div>
         <div class="flex flex-col">
-            <h2 class="text-2xl">Datum</h2>
-            <p class="text-xl">{{ \Carbon\Carbon::parse($activiteit->Begin_activiteit)->format('Y-m-d H:i') }}</p>
+            <h2 class="text-2xl">Begint op: </h2>
+            <p class="text-xl">{{ \Carbon\Carbon::parse($activiteit->Begin_activiteit)->format('d-m-Y H:i') }}</p>
         </div>
         <div class="flex flex-col">
-            <h2 class="text-2xl">Tijd</h2>
-            <p class="text-xl">{{ \Carbon\Carbon::parse($activiteit->Eind_activiteit)->format('Y-m-d H:i') }}</p>
+            <h2 class="text-2xl">Eindigt op:</h2>
+            <p class="text-xl">{{ \Carbon\Carbon::parse($activiteit->Eind_activiteit)->format('d-m-Y H:i') }}</p>
         </div>
         @if ($activiteit->Kosten != null)
         <div class="flex flex-col">
-            <h2 class="text-2xl">Kosten</h2>
+            <h2 class="text-2xl">Kosten:</h2>
             <p class="text-xl">€{{ $activiteit->Kosten }},-</p>
         </div>
         @endif
         <div class="flex flex-col">
-            <h2 class="text-2xl">Aantal deelnemers</h2>
+            <h2 class="text-2xl">Aantal deelnemers:</h2>
             <p class="text-xl">{{ $activiteit->deelnemers }}/ {{ $activiteit->maximaal_deelnemers }}</p>
         </div>
         <div class="flex flex-col">
@@ -110,8 +114,34 @@
         <button class="mt-4 text-red-600" onclick="closeAuthModal()">Sluiten</button>
     </div>
 </div>
+<!-- Pop-up voor bevestigen van verwijderen -->
+<div id="deleteModal" class="fixed top-0 left-0 w-full h-full bg-gray-900 bg-opacity-50 justify-center items-center hidden">
+    <div class="bg-white p-6 rounded-lg w-[400px] relative">
+        <h2 class="text-2xl mb-4">Weet je zeker dat je deze activiteit wilt verwijderen?</h2>
+        <form id="delete-form" action="{{ route('activiteitBeheer.destroy', $activiteit->id) }}" method="POST">
+            @csrf
+            @method('DELETE')
+            <button type="submit" class="bg-[#EEAF00] p-2 w-full rounded-md text-xl text-white">Bevestigen</button>
+        </form>
+        <button class="mt-4 text-block-300" onclick="closeDeleteModal()">Annuleren</button>
+    </div>
+</div>
+
 
 <script>
+    function openDeleteModal(){
+        document.getElementById('deleteModal').classList.remove('hidden');
+        document.getElementById('deleteModal').classList.add('flex');
+    }
+    function closeDeleteModal(){
+        document.getElementById('deleteModal').classList.add('hidden');
+        document.getElementById('deleteModal').classList.remove('flex');
+    }
+    document.getElementById('deleteModal').addEventListener('click', function(event) {
+        if (event.target === this) {
+            closeDeleteModal();
+        }
+    });
     function openModal() {
         document.getElementById('emailModal').classList.remove('hidden');
         document.getElementById('emailModal').classList.add('flex');

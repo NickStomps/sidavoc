@@ -56,7 +56,9 @@ class InschrijfController extends Controller
             if (auth()->check()) {
                 $inschrijf->user_id = auth()->user()->id;
                 $inschrijf->user_email = auth()->user()->email;
-                $inschrijf->opmerking = $request->opmerking;
+                $inschrijf->naam = auth()->user()->name;
+                $inschrijf->opmerking = $request->opmerking; 
+
             } else {
                 // geen gebruiker ingelogd, gebruik email van de request veld
                 $inschrijf->user_email = $request->email;
