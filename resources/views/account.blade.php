@@ -6,10 +6,12 @@
 </div>
 <div class="all-activiteit flex content-around justify-center gap-4 flex-wrap w-[100%] mx-auto flex-row mb-10">
     <div class="w-[80%] mx-auto mt-10">
-        <h1 class="text-3xl font-bold mb-8">AANKOMENDE ACTIVITEITEN</h1>
         <div class="flex flex-wrap gap-4">
-            @foreach ($activiteiten as $activiteit)
-                <div class="w-[23%] mb-8">
+            @foreach ($inschrijvingen as $inschrijving)
+                @foreach ($activiteiten as $activiteit)
+                    @if ($inschrijving->activiteit_id == $activiteit->id && $inschrijving->user_id == Auth::user()->id)
+                
+             <div class="w-[23%] mb-8">
                     <a href="/activiteitendetails/{{$activiteit->id}}" class="transform bg-white w-full transition duration-500 hover:scale-105 flex justify-center items-center shadow-lg">
                         <div class="w-full h-full flex flex-col justify-between">
                             <div class="w-full h-[200px] bg-gray-300 rounded-t-lg">
@@ -25,7 +27,9 @@
                             </div>
                         </div>
                     </a>
-                </div>
+                </div> 
+            @endif
+                @endforeach
             @endforeach
         </div>
     </div>
