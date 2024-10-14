@@ -40,6 +40,18 @@
             <input class="form-input" type="password" name="password_confirmation" id="password_confirmation" required>
         </div>
 
+        <div>
+            <label class="form-label" for="roleInput">Roles</label>
+            <input class="form-input" list="roles" name="role" id="roleInput" required>
+            <datalist id="roles">
+                @foreach ($roles as $role)
+                    <option data-role-id="{{ $role->id }}" value="{{ $role->role }}"></option>
+                @endforeach
+            </datalist>
+            <!-- Hidden input to store the selected roleId -->
+            <input type="hidden" name="roleId" id="roleId">
+        </div>
+
         <button class="form-button" type="submit">Registreer</button>
     </form>
     <style>
@@ -121,4 +133,20 @@
             }
         }
     </style>
+    <script>
+            document.getElementById('roleInput').addEventListener('click', function() {
+        this.value = ''; 
+        document.getElementById('roleId').value = ''; 
+    });
+        document.getElementById('roleInput').addEventListener('input', function() {
+            var input = this.value;
+            var options = document.getElementById('roles').options;
+            for (var i = 0; i < options.length; i++) {
+                if (options[i].value === input) {
+                    document.getElementById('roleId').value = options[i].getAttribute('data-role-id');
+                    break;
+                }
+            }
+        });
+    </script>
 @endsection
