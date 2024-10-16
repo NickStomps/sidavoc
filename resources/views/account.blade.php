@@ -7,10 +7,15 @@
 <div class="all-activiteit flex content-around justify-center gap-4 flex-wrap w-[100%] mx-auto flex-row mb-10">
     <div class="w-[80%] mx-auto mt-10">
         <div class="flex flex-wrap gap-4">
+            @php
+             $heeftactiviteit = false;
+            @endphp
             @foreach ($inschrijvingen as $inschrijving)
                 @foreach ($activiteiten as $activiteit)
                     @if ($inschrijving->activiteit_id == $activiteit->id && $inschrijving->user_id == Auth::user()->id)
-                
+                @php
+                    $heeftactiviteit = true;
+                @endphp
              <div class="w-[23%] mb-8">
                     <a href="/activiteitendetails/{{$activiteit->id}}" class="transform bg-white w-full transition duration-500 hover:scale-105 flex justify-center items-center shadow-lg">
                         <div class="w-full h-full flex flex-col justify-between">
@@ -31,6 +36,11 @@
             @endif
                 @endforeach
             @endforeach
+            @if ($heeftactiviteit == false)
+                <div class="w-full flex justify-center">
+                    <h1 class="text-2xl font-bold">Je hebt nog geen activiteiten waar je aan deelneemt</h1>
+                </div>
+            @endif
         </div>
     </div>
 </div>
