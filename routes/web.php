@@ -40,7 +40,6 @@ Route::post('/uitschrijven', [App\Http\Controllers\InschrijfController::class, '
 
 Route::middleware('auth')->group(function () {
     Route::get('/overzicht', [\App\Http\Controllers\InschrijfController::class, 'showIngeschrevenActieviteit'])->name('overzicht');
-    Route::get('/overzicht', [\App\Http\Controllers\UsersController::class, 'show'])->name('overzicht');
 
     Route::middleware(['auth', 'roles:2'])->group(function () {
         Route::get('/activiteitBeheer', [\App\Http\Controllers\ActiviteitBeheerController::class, 'index'])->name('activiteitBeheer');
@@ -49,4 +48,5 @@ Route::middleware('auth')->group(function () {
         Route::get('/activiteitBeheerEdit', [\App\Http\Controllers\ActiviteitBeheerEditController::class, 'index'])->name('activiteitBeheerEdit');
         Route::get('/activiteitBeheerEdit/{id}', [App\Http\Controllers\ActiviteitBeheerEditController::class, 'show'])->name('activiteitBeheerEdit.show');
         Route::delete('/activiteitBeheer/delete/{id}', [App\Http\Controllers\ActiviteitBeheerController::class, 'destroy'])->name('activiteitBeheer.destroy');
+    });
     });
