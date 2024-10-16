@@ -41,11 +41,14 @@
             @endif
     </div>
 
-    <p class="text-xl w-[80%] mx-[128px]">
+    <p class="text-xl max-w-[80%] mx-[128px]">
         @if ($activiteit->Details_activiteit == null)
         Deze activiteit heeft geen beschrijving.
         @else
-        {{ $activiteit->Details_activiteit }}
+        <div class="text-xl mx-40">
+            {{ $activiteit->Details_activiteit }}
+        </div>
+        
         @endif
     </p>
 
