@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\activiteit;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Auth;
@@ -17,7 +18,23 @@ class ActiviteitController extends Controller
     {
 
         $activiteiten = Activiteit::all();
-        return view('home', ['activiteiten' => $activiteiten]);
+
+        $sortedActiviteiten = $activiteiten->sortBy('Begin_activiteit');
+
+        $now = Carbon::now();
+
+        $aankomendeActiviteiten = $sortedActiviteiten->filter(function ($activiteit) use ($now) {
+            return Carbon::parse($activiteit->Begin_activiteit)->isFuture();
+        });
+
+        $vorigeActiviteiten = $sortedActiviteiten->filter(function ($activiteit) use ($now) {
+            return Carbon::parse($activiteit->Begin_activiteit)->isPast();
+        });
+
+        return view('home', [
+            'aankomendeActiviteiten' => $aankomendeActiviteiten,
+            'vorigeActiviteiten' => $vorigeActiviteiten,
+        ]);
 
     }
 

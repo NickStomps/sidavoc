@@ -6,6 +6,7 @@ use App\Models\ActiviteitBeheerEdit;
 use App\Models\activiteit;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class ActiviteitBeheerEditController extends Controller
 {
@@ -65,8 +66,9 @@ class ActiviteitBeheerEditController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, ActiviteitBeheerEdit $activiteitBeheerEdit)
+    public function update(Request $request, $id)
     {
+        try{
         $request->validate([
             'activiteitNaam' => 'required|string|max:255',
             'activiteitDetails' => 'nullable|string',
@@ -90,6 +92,8 @@ class ActiviteitBeheerEditController extends Controller
             'maxDeelnemers'
         ]);
 
+        Log::info('Updating activity with data: ', $data);
+
         if ($request->hasFile('image')) {
             $imageName = time().'.'.$request->image->extension();
             $request->image->storeAs('/public/images', $imageName);
@@ -109,9 +113,19 @@ class ActiviteitBeheerEditController extends Controller
             'image_path' => $data['image_path'] ?? $activiteit->image_path,
         ]);
 
-        return redirect()->route('activiteitBeheerEdit.show', ['id' => $activiteit->id])
-                        ->with('bericht', 'Activiteit succesvol bijgewerkt.');
+        Log::info('Activity updated successfully: ', ['id' => $id]);
+
+        $activiteit = Activiteit::findOrFail($id);
+        $activiteit->update($data);
+
+        return redirect('/');
+    } catch (\Exception $e) {
+
+        Log::error('Error updating activity: ', ['error' => $e->getMessage()]);
+        return redirect()->route('activiteitBeheerEdit.show', ['id' => $id])
+                ->with('error', 'Er is iets misgegaan bij het bijwerken van de activiteit.');
     }
+}
 
     /**
      * Remove the specified resource from storage.
