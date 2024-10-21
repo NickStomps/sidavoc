@@ -184,6 +184,12 @@ class InschrijfController extends Controller
     public function destroy($id)
     {
         $inschrijf = inschrijf::findOrFail($id);
+        $activiteit = activiteit::find($inschrijf->activiteit_id);
+        // dd($activiteit);
+            if ($activiteit->deelnemers > 0) {
+                $activiteit->deelnemers -= 1;
+                $activiteit->save();
+            }
         $inschrijf->delete();
 
         return redirect("/deelnemers/{$inschrijf->activiteit_id}")->with('success', 'Deelnemer is succesvol verwijderd.');
