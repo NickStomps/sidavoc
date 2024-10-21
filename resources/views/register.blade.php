@@ -48,7 +48,7 @@
                     <option data-role-id="{{ $role->id }}" value="{{ $role->role }}"></option>
                 @endforeach
             </datalist>
-            <!-- Hidden input to store the selected roleId -->
+            <!-- hidden input om de geselecteerde role te onthouden-->
             <input type="hidden" name="roleId" id="roleId">
         </div>
 
@@ -134,6 +134,7 @@
         }
     </style>
     <script>
+        /*reset het menu als je er op klikt*/
             document.getElementById('roleInput').addEventListener('click', function() {
         this.value = ''; 
         document.getElementById('roleId').value = ''; 

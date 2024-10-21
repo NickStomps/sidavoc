@@ -4,8 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\activiteit;
 use App\Models\inschrijf;
+use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log; 
+use Illuminate\Support\Facades\Log;
 
 
 class InschrijfController extends Controller
@@ -24,7 +25,7 @@ class InschrijfController extends Controller
     public function create()
     {
         // 
-        
+
     }
 
     /**
@@ -33,7 +34,7 @@ class InschrijfController extends Controller
     public function store(Request $request)
     {
         //inschrijvingen opslaan
-        
+
     }
 
     public function saveEmail(Request $request)
@@ -50,13 +51,15 @@ class InschrijfController extends Controller
             $inschrijf = new inschrijf();
             $inschrijf->activiteit_id = $request->activiteit_id;
             $inschrijf->opmerking = $request->opmerking;
-           
+
 
             // als de gebruiker is geauthenticeerd, gebruik user_id en user_email
             if (auth()->check()) {
                 $inschrijf->user_id = auth()->user()->id;
                 $inschrijf->user_email = auth()->user()->email;
+                $inschrijf->naam = auth()->user()->name;
                 $inschrijf->opmerking = $request->opmerking; 
+
             } else {
                 // geen gebruiker ingelogd, gebruik email van de request veld
                 $inschrijf->user_email = $request->email;
@@ -70,7 +73,7 @@ class InschrijfController extends Controller
             $activiteit = activiteit::find($request->activiteit_id);
             $activiteit->deelnemers += 1;
             $activiteit->save();
-            
+
             return redirect()->back()->with('success', 'Je bent succesvol ingeschreven.');
         } catch (\Exception $e) {
             return redirect()->route('activiteitendetails', ['id' => $request->activiteit_id])->with('error', $e->getMessage());
@@ -78,6 +81,13 @@ class InschrijfController extends Controller
     }
 
 
+    public function showIngeschrevenActieviteit(){
+        $activiteit = activiteit::all();
+        $inschrijvingen = inschrijf::all();
+        $user = User::all();
+
+        return view('account', ['activiteiten' => $activiteit, 'inschrijvingen' => $inschrijvingen, 'user' => $user]);
+    }   
     public function showActiviteit($activiteit_id)
     {
         try {
@@ -102,7 +112,6 @@ class InschrijfController extends Controller
                 'activiteit' => $activiteit,
                 'isIngeschreven' => $isIngeschreven
             ]);
-
         } catch (\Exception $e) {
             return redirect()->route('activiteitendetails')->with('error', 'Er is iets misgegaan bij het laden van de activiteit.');
         }
@@ -129,15 +138,14 @@ class InschrijfController extends Controller
             }
 
             $activiteit = activiteit::find($request->activiteit_id);
-            if($activiteit->deelnemers > 0){
+            if ($activiteit->deelnemers > 0) {
                 $activiteit->deelnemers -= 1;
                 $activiteit->save();
-            }
-            else{
+            } else {
                 return redirect('/')->with('error', 'Er is iets misgegaan bij het uitschrijven.');
             }
-            
-            
+
+
             // Redirect terug naar de homepagina met succesmelding
             return redirect('/')->with('success', 'Je bent succesvol uitgeschreven.');
         } catch (\Exception $e) {
@@ -173,8 +181,11 @@ class InschrijfController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(inschrijf $inschrijf)
+    public function destroy($id)
     {
-        //
+        $inschrijf = inschrijf::findOrFail($id);
+        $inschrijf->delete();
+
+        return redirect("/deelnemers/{$inschrijf->activiteit_id}")->with('success', 'Deelnemer is succesvol verwijderd.');
     }
 }
