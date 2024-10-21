@@ -40,19 +40,12 @@ class ActiviteitBeheerEditController extends Controller
     public function show(activiteit $activiteit)
     {
         $activiteit = activiteit::find(request('id'));
-
-    $minDate = activiteit::where('Begin_activiteit', '>=', Carbon::tomorrow())->min('Begin_activiteit');
-    
-    if (!$minDate) {
-        $minDate = Carbon::tomorrow()->format('Y-m-d\TH:i');
-    } else {
-        $minDate = Carbon::parse($minDate)->format('Y-m-d\TH:i');
-    }
-
-    return view('activiteitBeheerEdit', [
-        'activiteit' => $activiteit,
-        'minDate' => $minDate
-    ]);
+        $minDate = Carbon::now()->format('Y-m-d\TH:i');
+        
+        return view('activiteitBeheerEdit', [
+            'activiteit' => $activiteit,
+            'minDate' => $minDate
+        ]);
     }
 
     /**
