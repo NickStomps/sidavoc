@@ -5,7 +5,19 @@
 {{-- Container --}}
 <div class="w-[80%] mx-auto mt-10">
 
-    <h1 class="text-2xl font-bold mb-8">AANKOMENDE ACTIVITEITEN</h1>
+    @if(session()->has('success'))
+        <div class="bg-green-600 rounded w-1/2 m-auto text-center border-black border">
+            <p class="text-white text-lg m-2">{{ session('success') }}</p>
+        </div>
+    @endif
+
+    @if(session()->has('error'))
+        <div class="bg-red-600 rounded w-1/2 m-auto text-center border-black border"> 
+            <p class="text-white text-lg m-2">{{ session('error') }}</p>
+        </div>
+    @endif
+    <h1 class="text-3xl font-bold mb-8">AANKOMENDE ACTIVITEITEN</h1>
+
     <div class="flex flex-wrap gap-4">
         @foreach ($aankomendeActiviteiten as $activiteit)
             <div class="w-[23%] mb-8">
@@ -18,7 +30,7 @@
                         <p class="mt-2 flex-grow">{{ \Illuminate\Support\Str::limit($activiteit->Details_activiteit, 35, '...') }}</p>
                         <div class="flex justify-between mt-4 text-sm text-gray-500">
                             <span class="opacity-75">{{ \Carbon\Carbon::parse($activiteit->Begin_activiteit)->format('d-m-Y H:i') }}</span>
-                            <span class="opacity-75">{{ $activiteit->maximaal_deelnemers }}</span>
+                            <span class="opacity-75">{{$activiteit->deelnemers}}/{{ $activiteit->maximaal_deelnemers }}</span>
                         </div>
                     </div>
                 </a>
