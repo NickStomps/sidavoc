@@ -3,14 +3,13 @@
 @if($deelnemers->count() > 0)
 <div class=" flex justify-center flex-col">
     <h1 class="text-3xl font-bold mb-8 mx-auto my-0">Deelnemers</h1>
-    <table class="border border-black">
+    <table class="border border-black mx-10">
         <tr>
             <td class="border border-black">ID</td>
             <td class="border border-black">User ID</td>
             <td class="border border-black">Naam</td>
             <td class="border border-black">Email</td>
             <td class="border border-black">opmerking:</td>
-            <td class="border border-black"></td>
         </tr>
         @foreach ($deelnemers as $deelnemer)
         <tr>
@@ -28,11 +27,11 @@
             <td class="border border-black">{{$deelnemer->opmerking}}</td>
             @endif
             <td class="border border-black">
-                <form method="POST" action="/deelnemers/delete/{{$deelnemer->id}}">
+                <form method="POST" action="/deelnemers/delete/{{$deelnemer->id}}" class="flex justify-center">
                     @csrf
                     @method('DELETE')
                     <input type="hidden" name="deelnemer_id" value="{{$deelnemer->id}}">
-                    <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Uitschrijven</button>
+                    <button type="submit" class="bg-[#EEAF00] rounded-md text-2xl flex items-center justify-center px-4 py-2 my-1">Uitschrijven</button>
                 </form>
         </tr>
         @endforeach
