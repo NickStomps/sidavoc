@@ -69,7 +69,7 @@ class ActiviteitBeheerEditController extends Controller
             'activiteitEindDatum' => 'required|date',
             'activiteitLocatie' => 'required|string|max:255',
             'eten' => 'required|boolean',
-            'kosten' => 'required|numeric',
+            'kosten' => 'nullable|numeric',
             'maxDeelnemers' => 'required|integer|min:1',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
