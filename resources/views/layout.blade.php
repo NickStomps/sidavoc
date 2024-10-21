@@ -14,78 +14,54 @@
 </head>
 <body>
     <div class="w-full">
-            <div class="bg-[#EEAF00]">
-             <div class="flex justify-center w-full"> 
-                 <ul class="flex justify-between w-[50%] my-3">
-                     <li>
+        <div class="bg-[#EEAF00]">
+            <div class="flex justify-center w-full"> 
+                <ul class="flex justify-between w-[75%] my-3">
+                    <li class="hover:underline underline-offset-2">
                         <a href="/">
                             home
                         </a>
-                     </li>
-                     @auth
-                     @if(Auth::user()->roleId == 2)           
-                     <li>
-                        <a href="/activiteitBeheer">toevoegen</a>
-                     </li>     
-                    @endif
-                     @endauth   
-                     <li>
-                        <a id="account">
-                            <i class="fa-solid fa-user"></i>    
-                            @auth
-                            {{Auth::user()->name }}
-                            @endauth
-                        </a>
-                        </div>
-                         </div>
-                        <ul class="hidden" id="lijst">
-                            @auth
-                                <li>
-                                    <a href="/overzicht">
-                                        overzicht
-                                    </a>
-                                </li>
-                            @else
-                                <li>
-                                    <a href="/overzicht">
-                                        login
-                                    </a>
-                                </li>
-                            @endauth
-                            @auth
+                    </li>
+                    @auth
+                        <li class="hover:underline underline-offset-2">
+                            <a href="/overzicht">
+                                overzicht
+                            </a>
+                        </li>
+                    @endauth   
+                    @auth
+                        @if(Auth::user()->roleId == 2)           
+                            <li class="hover:underline underline-offset-2">
+                                <a href="/activiteitBeheer">toevoegen</a>
+                            </li>     
+                            <li class="hover:underline underline-offset-2">
+                                <a href="/register">gebruiker toevoegen</a>
+                            </li>
+                        @endif
+                    @endauth
+                    <li>
+                        @if(Auth::guest())
+                            <a href="/login">
+                                <i class="fa-solid fa-user"></i> 
+                                Login
+                            </a>   
+                        @endif
+                    </li>
+                        @auth
+                            Welkom {{Auth::user()->name }}
+                        @endauth
+                        @auth
                             <li>
-                                <a href="/logout">
-                                    uitloggen
+                                <a href="/logout" >
+                                    <i class="fa-solid fa-user-slash"></i> Logout                                 
                                 </a>
                             </li>
-                            @endauth
-                        </ul>
-                     </li> 
-                 </ul>
-             </div>
+                        @endauth
+                    </li>
+                </ul>
             </div>
-            
+        </div>            
         @yield('content')
     </div>
-    <style>
-        #lijst
-        {
-            background-color: white ;
-            border: 2px, solid;
-            border-radius: 10px;
-            position: absolute;
-            margin-left: 70%;
-            padding: 5px;
-        }
-    </style>
-    <script>
-        var lijst = document.getElementById("lijst");
-        var account = document.getElementById("account")
-
-        account.onclick = function() {
-             lijst.classList.toggle('hidden');
-        }
-console.log("test")
-    </script>
 </body>
 </html>
